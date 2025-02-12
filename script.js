@@ -3,13 +3,12 @@
 const mainDispText = document.querySelector(".main-dsp");
 const numBtnNodes = document.querySelectorAll(".num-btn");
 const opBtn = document.querySelectorAll(".op-btn");
-console.log(opBtn);
 // const b = document.querySelector("");
 // const c = document.querySelector("");
 
-let num1 = 0;
+let num1 = "";
 let operator = "";
-let num2 = 0;
+let num2 = "";
 
 const operate = (num1, operator, num2) => {
   const add = (a, b) => a + b;
@@ -42,17 +41,27 @@ numBtnNodes.forEach((btn) => {
     // mainDispText.innerText = "";
     if (btn.innerText === "." && mainDispText.innerText.includes(".")) {
       alert("No multiple dots allowed");
-    } else if (mainDispText.innerText === "0") {
+    } else if (mainDispText.innerText === "0" && !operator) {
       mainDispText.innerText = btn.innerText === "." ? 0 : "";
       mainDispText.innerText += btn.innerText;
       num1 = mainDispText.innerText;
       console.log(num1);
       console.log(typeof num1);
-    } else {
+    } else if (num1.length < 12 && !operator) {
       mainDispText.innerText += btn.innerText;
       num1 = mainDispText.innerText;
-      console.log(num1);
+      console.log(`This is num1 value ${num1}`);
       console.log(typeof num1);
+    } else if (num1 && operator) {
+      console.log(typeof num2, num2)
+      mainDispText.innerText = num2;
+      mainDispText.innerText += btn.innerText;
+      num2 = mainDispText.innerText;
+      console.log(`This is num2 value ${num2}`);
+      console.log(typeof num2);
+    } 
+    else if (num1.length === 12 || num2.length === 12){
+      alert("Number is outside operating range");
     }
   });
 });
@@ -63,9 +72,20 @@ opBtn.forEach((btn) => {
     setTimeout(() => {
       e.target.style.backgroundColor = "#f57d1f";
     }, 100);
-    operator = btn.innerText;
-    console.log(operator);
-    console.log(typeof operator);
+    if (operator.length > 0 && btn.innerText !== "=") {
+      alert("No consecutive operators allowed");
+    } else if (btn.innerText !== "=") {
+      operator += btn.innerText;
+      console.log(operator);
+      console.log(typeof operator);
+    } else if (btn.innerText === "=") {
+      num1 = Number(num1);
+      num2 = Number(num2);
+      mainDispText.innerText = operate(num1, operator, num2);
+      num1 = mainDispText.innerText;
+      num2 = "";
+      operator = "";
+    }
   });
 });
 
