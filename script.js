@@ -2,12 +2,14 @@
 
 const mainDispText = document.querySelector(".main-dsp");
 const numBtnNodes = document.querySelectorAll(".num-btn");
+const opBtn = document.querySelectorAll(".op-btn");
+console.log(opBtn);
 // const b = document.querySelector("");
 // const c = document.querySelector("");
 
-let num1 = "";
+let num1 = 0;
 let operator = "";
-let num2 = "";
+let num2 = 0;
 
 const operate = (num1, operator, num2) => {
   const add = (a, b) => a + b;
@@ -32,7 +34,7 @@ const operate = (num1, operator, num2) => {
 };
 
 numBtnNodes.forEach((btn) => {
-  btn.addEventListener("click", (e) => {
+  btn.addEventListener("click", e => {
     e.target.style.backgroundColor = "#FF43A7";
     setTimeout(() => {
       e.target.style.backgroundColor = "#f72798";
@@ -43,12 +45,21 @@ numBtnNodes.forEach((btn) => {
     } else {
       mainDispText.innerText += btn.innerText;
       num1 = Number(mainDispText.innerText);
+      mainDispText.innerText = num1;
       console.log(num1);
       console.log(typeof num1);
     }
   });
 });
 
+opBtn.forEach((btn) => {
+  btn.addEventListener ("click", e => {
+    e.target.style.backgroundColor = "#ff913b";
+    setTimeout(() => {e.target.style.backgroundColor = "#f57d1f"}, 100);
+    operator = btn.innerText;
+    console.log(operator);
+  })
+})
 
 
 // console.log(add(1, 2));
