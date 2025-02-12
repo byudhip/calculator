@@ -3,7 +3,7 @@
 const mainDispText = document.querySelector(".main-dsp");
 const numBtnNodes = document.querySelectorAll(".num-btn");
 const opBtn = document.querySelectorAll(".op-btn");
-// const b = document.querySelector("");
+const miscBtn = document.querySelectorAll(".misc-btn");
 // const c = document.querySelector("");
 
 let num1 = "";
@@ -41,7 +41,7 @@ numBtnNodes.forEach((btn) => {
     // mainDispText.innerText = "";
     if (btn.innerText === "." && mainDispText.innerText.includes(".")) {
       alert("No multiple dots allowed");
-    } else if (mainDispText.innerText === "0" && !operator) {
+    } else if (mainDispText.innerText === "0" || mainDispText.innerText === "LEMAW" && !operator) {
       mainDispText.innerText = btn.innerText === "." ? 0 : "";
       mainDispText.innerText += btn.innerText;
       num1 = mainDispText.innerText;
@@ -53,14 +53,13 @@ numBtnNodes.forEach((btn) => {
       console.log(`This is num1 value ${num1}`);
       console.log(typeof num1);
     } else if (num1 && operator) {
-      console.log(typeof num2, num2)
+      console.log(typeof num2, num2);
       mainDispText.innerText = num2;
       mainDispText.innerText += btn.innerText;
       num2 = mainDispText.innerText;
       console.log(`This is num2 value ${num2}`);
       console.log(typeof num2);
-    } 
-    else if (num1.length === 12 || num2.length === 12){
+    } else if (num1.length === 12 || num2.length === 12) {
       alert("Number is outside operating range");
     }
   });
@@ -81,10 +80,17 @@ opBtn.forEach((btn) => {
     } else if (btn.innerText === "=") {
       num1 = Number(num1);
       num2 = Number(num2);
-      mainDispText.innerText = operate(num1, operator, num2);
-      num1 = mainDispText.innerText;
-      num2 = "";
-      operator = "";
+      if (num2 === 0 && operator === "/") {
+        mainDispText.innerText = "LEMAW";
+        num1 = "";
+        num2 = "";
+        operator = "";
+      } else {
+        mainDispText.innerText = operate(num1, operator, num2);
+        num1 = mainDispText.innerText;
+        num2 = "";
+        operator = "";
+      }
     }
   });
 });
