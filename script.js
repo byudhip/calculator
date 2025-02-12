@@ -18,16 +18,16 @@ const operate = (num1, operator, num2) => {
 
   switch (operator) {
     case "+":
-      return add(num1, num2);
+      return Number.isInteger(add(num1, num2)) ? add(num1, num2): add(num1, num2).toFixed(2);
       break;
     case "-":
-      return subtract(num1, num2);
+      return Number.isInteger(subtract(num1, num2)) ? subtract(num1, num2): subtract(num1, num2).toFixed(2);
       break;
     case "*":
-      return multiply(num1, num2);
+      return Number.isInteger(multiply(num1, num2)) ? multiply(num1, num2): multiply(num1, num2).toFixed(2);
       break;
     case "/":
-      return divide(num1, num2);
+      return Number.isInteger(divide(num1, num2)) ? divide(num1, num2): divide(num1, num2).toFixed(2);
       break;
   }
 };
