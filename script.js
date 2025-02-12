@@ -34,7 +34,7 @@ const operate = (num1, operator, num2) => {
 };
 
 numBtnNodes.forEach((btn) => {
-  btn.addEventListener("click", e => {
+  btn.addEventListener("click", (e) => {
     e.target.style.backgroundColor = "#FF43A7";
     setTimeout(() => {
       e.target.style.backgroundColor = "#f72798";
@@ -42,10 +42,15 @@ numBtnNodes.forEach((btn) => {
     // mainDispText.innerText = "";
     if (btn.innerText === "." && mainDispText.innerText.includes(".")) {
       alert("No multiple dots allowed");
+    } else if (mainDispText.innerText === "0") {
+      mainDispText.innerText = btn.innerText === "." ? 0 : "";
+      mainDispText.innerText += btn.innerText;
+      num1 = mainDispText.innerText;
+      console.log(num1);
+      console.log(typeof num1);
     } else {
       mainDispText.innerText += btn.innerText;
-      num1 = Number(mainDispText.innerText);
-      mainDispText.innerText = num1;
+      num1 = mainDispText.innerText;
       console.log(num1);
       console.log(typeof num1);
     }
@@ -53,14 +58,16 @@ numBtnNodes.forEach((btn) => {
 });
 
 opBtn.forEach((btn) => {
-  btn.addEventListener ("click", e => {
+  btn.addEventListener("click", (e) => {
     e.target.style.backgroundColor = "#ff913b";
-    setTimeout(() => {e.target.style.backgroundColor = "#f57d1f"}, 100);
+    setTimeout(() => {
+      e.target.style.backgroundColor = "#f57d1f";
+    }, 100);
     operator = btn.innerText;
     console.log(operator);
-  })
-})
-
+    console.log(typeof operator);
+  });
+});
 
 // console.log(add(1, 2));
 // console.log(subtract(8, 23));
