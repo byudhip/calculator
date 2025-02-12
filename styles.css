@@ -40,10 +40,11 @@ body {
     background-color: #ebf400;
 }
 
-.operation-dsp {
+.main-dsp {
     font-size: 40px;
     padding: 5px;
     text-align: right;
+    height: 60px;
     width: 90%;
     background-color: #000000;
     color: #ff43a7;
