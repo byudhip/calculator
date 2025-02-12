@@ -47,14 +47,13 @@ numBtnNodes.forEach((btn) => {
     setTimeout(() => {
       e.target.style.backgroundColor = "#f72798";
     }, 100);
-    // mainDispText.innerText = "";
     if (btn.innerText === "." && mainDispText.innerText.includes(".")) {
       alert("No multiple dots allowed");
     } else if (
-      mainDispText.innerText === "0" ||
-      (mainDispText.innerText === "LEMAW" && !operator)
+      (mainDispText.innerText === "0" ||
+      mainDispText.innerText === "LEMAW") && !operator && num1toggle
     ) {
-      mainDispText.innerText = btn.innerText === "." ? 0 : "";
+      mainDispText.innerText = btn.innerText === "." ? "0" : "";
       mainDispText.innerText += btn.innerText;
       num1 = mainDispText.innerText;
       console.log(`This is num1 value ${num1},`, typeof num1);
@@ -121,16 +120,19 @@ miscBtn.forEach((btn) => {
       num2 = "";
       operator = "";
     } else if (btn.innerText === "C") {
-      mainDispText.innerText = mainDispText.innerText.slice(
+      if (mainDispText.innerText === "undefined" || mainDispText.innerText === "LEMAW") {
+        return;
+      }
+      mainDispText.innerText = mainDispText.innerText.length === 1 ? "0" : mainDispText.innerText.slice(
         0,
-        mainDispText.innerText.length - 1
-      );
+        mainDispText.innerText.length - 1);
+        console.log(`this is toggle value ${num1toggle}`)
       if (num1toggle) {
         num1 = mainDispText.innerText;
         console.log(`This is num1 value ${num1},`, typeof num1);
         console.log(`This is num2 value ${num2},`, typeof num2);
-      } else {
-        num2 = mainDispText.innerText;
+      } else if (!num1toggle) {
+        num2 = mainDispText.innerText === "0" ? "" : mainDispText.innerText;
         console.log(`This is num1 value ${num1},`, typeof num1);
         console.log(`This is num2 value ${num2},`, typeof num2);
       }
