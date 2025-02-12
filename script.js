@@ -9,6 +9,7 @@ const miscBtn = document.querySelectorAll(".misc-btn");
 let num1 = "";
 let operator = "";
 let num2 = "";
+let num1toggle = true;
 
 const operate = (num1, operator, num2) => {
   const add = (a, b) => a + b;
@@ -18,16 +19,24 @@ const operate = (num1, operator, num2) => {
 
   switch (operator) {
     case "+":
-      return Number.isInteger(add(num1, num2)) ? add(num1, num2): add(num1, num2).toFixed(2);
+      return Number.isInteger(add(num1, num2))
+        ? add(num1, num2)
+        : add(num1, num2).toFixed(2);
       break;
     case "-":
-      return Number.isInteger(subtract(num1, num2)) ? subtract(num1, num2): subtract(num1, num2).toFixed(2);
+      return Number.isInteger(subtract(num1, num2))
+        ? subtract(num1, num2)
+        : subtract(num1, num2).toFixed(2);
       break;
     case "*":
-      return Number.isInteger(multiply(num1, num2)) ? multiply(num1, num2): multiply(num1, num2).toFixed(2);
+      return Number.isInteger(multiply(num1, num2))
+        ? multiply(num1, num2)
+        : multiply(num1, num2).toFixed(2);
       break;
     case "/":
-      return Number.isInteger(divide(num1, num2)) ? divide(num1, num2): divide(num1, num2).toFixed(2);
+      return Number.isInteger(divide(num1, num2))
+        ? divide(num1, num2)
+        : divide(num1, num2).toFixed(2);
       break;
   }
 };
@@ -41,24 +50,25 @@ numBtnNodes.forEach((btn) => {
     // mainDispText.innerText = "";
     if (btn.innerText === "." && mainDispText.innerText.includes(".")) {
       alert("No multiple dots allowed");
-    } else if (mainDispText.innerText === "0" || mainDispText.innerText === "LEMAW" && !operator) {
+    } else if (
+      mainDispText.innerText === "0" ||
+      (mainDispText.innerText === "LEMAW" && !operator)
+    ) {
       mainDispText.innerText = btn.innerText === "." ? 0 : "";
       mainDispText.innerText += btn.innerText;
       num1 = mainDispText.innerText;
-      console.log(num1);
-      console.log(typeof num1);
+      console.log(`This is num1 value ${num1},`, typeof num1);
     } else if (num1.length < 12 && !operator) {
       mainDispText.innerText += btn.innerText;
       num1 = mainDispText.innerText;
-      console.log(`This is num1 value ${num1}`);
-      console.log(typeof num1);
+      console.log(`This is num1 value ${num1},`, typeof num1);
     } else if (num1 && operator) {
-      console.log(typeof num2, num2);
+      num1toggle = false;
+      console.log(`num1 toggle is ${num1toggle}`);
       mainDispText.innerText = num2;
       mainDispText.innerText += btn.innerText;
       num2 = mainDispText.innerText;
-      console.log(`This is num2 value ${num2}`);
-      console.log(typeof num2);
+      console.log(`This is num2 value ${num2},`, typeof num2);
     } else if (num1.length === 12 || num2.length === 12) {
       alert("Number is outside operating range");
     }
@@ -75,21 +85,54 @@ opBtn.forEach((btn) => {
       alert("No consecutive operators allowed");
     } else if (btn.innerText !== "=") {
       operator += btn.innerText;
-      console.log(operator);
-      console.log(typeof operator);
+      console.log(`This is the value of operator ${operator}`);
     } else if (btn.innerText === "=") {
       num1 = Number(num1);
       num2 = Number(num2);
       if (num2 === 0 && operator === "/") {
         mainDispText.innerText = "LEMAW";
+        num1toggle = true;
         num1 = "";
         num2 = "";
         operator = "";
       } else {
         mainDispText.innerText = operate(num1, operator, num2);
         num1 = mainDispText.innerText;
+        num1toggle = false;
+        console.log(`num1 toggle is ${num1toggle}`);
         num2 = "";
         operator = "";
+      }
+    }
+  });
+});
+
+miscBtn.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    e.target.style.backgroundColor = "#00A3A3";
+    setTimeout(() => {
+      e.target.style.backgroundColor = "#008B8B";
+    }, 100);
+    if (btn.innerText === "AC") {
+      mainDispText.innerText = "0";
+      num1toggle = true;
+      console.log(`num1 toggle is ${num1toggle}`);
+      num1 = "";
+      num2 = "";
+      operator = "";
+    } else if (btn.innerText === "C") {
+      mainDispText.innerText = mainDispText.innerText.slice(
+        0,
+        mainDispText.innerText.length - 1
+      );
+      if (num1toggle) {
+        num1 = mainDispText.innerText;
+        console.log(`This is num1 value ${num1},`, typeof num1);
+        console.log(`This is num2 value ${num2},`, typeof num2);
+      } else {
+        num2 = mainDispText.innerText;
+        console.log(`This is num1 value ${num1},`, typeof num1);
+        console.log(`This is num2 value ${num2},`, typeof num2);
       }
     }
   });
