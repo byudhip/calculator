@@ -29,8 +29,8 @@ body {
     background-color: #ebf400;
 }
 
-.main-dsp {
-    font-size: 1.8rem;
+.main-disp {
+    font-size: clamp(1rem, 1.8rem, 1.8rem);
     padding: 4% 2%;
     text-align: right;
     height: 60px;
