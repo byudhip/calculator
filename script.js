@@ -50,8 +50,9 @@ numBtnNodes.forEach((btn) => {
     if (btn.innerText === "." && mainDispText.innerText.includes(".")) {
       alert("No multiple dots allowed");
     } else if (
-      (mainDispText.innerText === "0" ||
-      mainDispText.innerText === "LEMAW") && !operator && num1toggle
+      (mainDispText.innerText === "0" || mainDispText.innerText === "LEMAW") &&
+      !operator &&
+      num1toggle
     ) {
       mainDispText.innerText = btn.innerText === "." ? "0" : "";
       mainDispText.innerText += btn.innerText;
@@ -84,10 +85,9 @@ opBtn.forEach((btn) => {
       alert("No consecutive operators allowed");
     } else if (btn.innerText !== "=") {
       operator += btn.innerText;
-      console.log(`This is the value of operator ${operator}`);
+      num1toggle = false;
+      console.log(`This is the value of operator: ${operator} and toggle: ${num1toggle}`);
     } else if (btn.innerText === "=") {
-      num1 = Number(num1);
-      num2 = Number(num2);
       if (num2 === 0 && operator === "/") {
         mainDispText.innerText = "LEMAW";
         num1toggle = true;
@@ -98,9 +98,9 @@ opBtn.forEach((btn) => {
         mainDispText.innerText = operate(num1, operator, num2);
         num1 = mainDispText.innerText;
         num1toggle = false;
-        console.log(`num1 toggle is ${num1toggle}`);
         num2 = "";
         operator = "";
+        console.log(`num1 toggle is ${num1toggle}, num1 is ${num1} num2 is ${num2}`);
       }
     }
   });
@@ -120,13 +120,17 @@ miscBtn.forEach((btn) => {
       num2 = "";
       operator = "";
     } else if (btn.innerText === "C") {
-      if (mainDispText.innerText === "undefined" || mainDispText.innerText === "LEMAW") {
+      if (
+        mainDispText.innerText === "undefined" ||
+        mainDispText.innerText === "LEMAW"
+      ) {
         return;
       }
-      mainDispText.innerText = mainDispText.innerText.length === 1 ? "0" : mainDispText.innerText.slice(
-        0,
-        mainDispText.innerText.length - 1);
-        console.log(`this is toggle value ${num1toggle}`)
+      mainDispText.innerText =
+        mainDispText.innerText.length <= 2 && mainDispText.innerText.startsWith("-")
+          ? "0"
+          : mainDispText.innerText.slice(0, mainDispText.innerText.length - 1);
+      console.log(`this is toggle value ${num1toggle}`);
       if (num1toggle) {
         num1 = mainDispText.innerText;
         console.log(`This is num1 value ${num1},`, typeof num1);
@@ -136,16 +140,35 @@ miscBtn.forEach((btn) => {
         console.log(`This is num1 value ${num1},`, typeof num1);
         console.log(`This is num2 value ${num2},`, typeof num2);
       }
+    } else if (btn.innerText === "+/-") {
+      if (
+        !mainDispText.innerText.startsWith("-") //&&
+        // mainDispText.innerText.length >= 1 &&
+        // !mainDispText.innerText.charAt(0) === "0"
+      ) {
+        mainDispText.innerText = "-" + mainDispText.innerText;
+        if (num1toggle) {
+          num1 = mainDispText.innerText;
+          console.log(`This is num1 value ${num1},`, typeof num1);
+          console.log(`This is num2 value ${num2},`, typeof num2);
+        } else if (!num1toggle) {
+          num2 = mainDispText.innerText;
+          console.log(`This is num1 value ${num1},`, typeof num1);
+          console.log(`This is num2 value ${num2},`, typeof num2);
+        }
+      } else if (mainDispText.innerText.startsWith("-")) {
+        mainDispText.innerText = mainDispText.innerText.slice(1);
+        if (num1toggle) {
+          num1 = mainDispText.innerText;
+          console.log(`This is num1 value ${num1},`, typeof num1);
+          console.log(`This is num2 value ${num2},`, typeof num2);
+        } else if (!num1toggle) {
+          num2 = mainDispText.innerText;
+          console.log(`This is num1 value ${num1},`, typeof num1);
+          console.log(`This is num2 value ${num2},`, typeof num2);
+        }
+      }
     }
   });
 });
 
-// console.log(add(1, 2));
-// console.log(subtract(8, 23));
-// console.log(multiply(21, 12));
-// console.log(divide(213, 24));
-
-// console.log(operate(1,"+",2));
-// console.log(operate(1,"-",2));
-// console.log(operate(1,"*",2));
-// console.log(operate(1,"/",2));
