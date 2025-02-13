@@ -25,7 +25,7 @@ const operate = (num1, operator, num2) => {
         Number.isInteger(num2) &&
         add(num1, num2) >= 1e15
       ) {
-        alert("go buy scientific calculator");
+        alert("out of bounds!");
         num1toggle = true;
         return "0";
       } else if (
@@ -39,7 +39,7 @@ const operate = (num1, operator, num2) => {
         (!Number.isInteger(num1) || !Number.isInteger(num2)) &&
         add(num1, num2) >= 1e15
       ) {
-        alert("go buy scientific calculator");
+        alert("out of bounds!");
         num1toggle = true;
         return "0";
       } else if (
@@ -55,7 +55,7 @@ const operate = (num1, operator, num2) => {
         Number.isInteger(num1) &&
         Number.isInteger(num2 && subtract(num1, num2)) >= 1e15
       ) {
-        alert("go buy scientific calculator");
+        alert("out of bounds!");
         num1toggle = true;
         return "0";
       } else if (
@@ -69,7 +69,7 @@ const operate = (num1, operator, num2) => {
         (!Number.isInteger(num1) || !Number.isInteger(num2)) &&
         subtract(num1, num2) >= 1e15
       ) {
-        alert("go buy scientific calculator");
+        alert("out of bounds!");
         num1toggle = true;
         return "0";
       } else if (
@@ -86,7 +86,7 @@ const operate = (num1, operator, num2) => {
         Number.isInteger(num2) &&
         multiply(num1, num2) >= 1e15
       ) {
-        alert("go buy scientific calculator");
+        alert("out of bounds!");
         num1toggle = true;
         return "0";
       } else if (
@@ -100,7 +100,7 @@ const operate = (num1, operator, num2) => {
         (!Number.isInteger(num1) || !Number.isInteger(num2)) &&
         multiply(num1, num2) >= 1e15
       ) {
-        alert("go buy scientific calculator");
+        alert("out of bounds!");
         num1toggle = true;
         return "0";
       } else if (
@@ -117,7 +117,7 @@ const operate = (num1, operator, num2) => {
         Number.isInteger(num2) &&
         divide(num1, num2) >= 1e15
       ) {
-        alert("go buy scientific calculator");
+        alert("out of bounds!");
         console.log(mainDispText.innerText, num1, typeof num1);
         num1toggle = true;
         return "0";
@@ -134,7 +134,7 @@ const operate = (num1, operator, num2) => {
         (!Number.isInteger(num1) || !Number.isInteger(num2)) &&
         divide(num1, num2) >= 1e15
       ) {
-        alert("go buy scientific calculator");
+        alert("out of bounds!");
         num1toggle = true;
         return "0";
       } else if (
@@ -163,7 +163,8 @@ numBtnNodes.forEach((btn) => {
       console.log(`Number button pressed, did nothing`);
       return;
     } else if (btn.innerText === "." && mainDispText.innerText.includes(".")) {
-      alert("No multiple dots allowed");
+      console.log("No multiple dots allowed");
+      return;
     } else if (mainDispText.innerText === "0" && !operator && num1toggle) {
       mainDispText.innerText = btn.innerText === "." ? "0" : "";
       mainDispText.innerText += btn.innerText;
@@ -190,9 +191,10 @@ numBtnNodes.forEach((btn) => {
         typeof num2
       );
     } else if (num1.length === 15 || num2.length === 15) {
-      alert("Number is outside operating range");
+      console.log("Number is outside operating range");
+      return;
     } else if (mainDispText.innerText.endsWith("%")) {
-      alert("No number/dot allowed after percent symbol");
+      console.log("No number/dot allowed after percent symbol");
       return;
     }
   });
@@ -205,7 +207,7 @@ opBtn.forEach((btn) => {
       e.target.style.backgroundColor = "#f57d1f";
     }, 100);
     if (operator.length > 0 && btn.innerText !== "=") {
-      alert("No consecutive operators allowed");
+      console.log("No consecutive operators allowed");
     } else if (btn.innerText !== "=") {
       operator += btn.innerText;
       num1toggle = false;
@@ -265,7 +267,7 @@ miscBtn.forEach((btn) => {
         mainDispText.innerText.length === 1
           ? "0"
           : mainDispText.innerText.slice(0, mainDispText.innerText.length - 1);
-      console.log(`C button pressed, this is toggle value ${num1toggle}`);
+      console.log(`C button pressed, this is toggle value: ${num1toggle}`);
       if (num1toggle) {
         num1 = mainDispText.innerText;
         console.log(
@@ -355,10 +357,11 @@ miscBtn.forEach((btn) => {
         console.log(`+/- button pressed, did nothing`);
         return;
       } else if (mainDispText.innerText.includes("%")) {
-        alert("No consecutive percent symbols allowed");
+        console.log("No consecutive percent symbols allowed");
         return;
-      } else if (!mainDispText.innerText.includes("%")) {
-        mainDispText.innerText = mainDispText.innerText + "%";
+      } else if (mainDispText.innerText !== "0" && !mainDispText.innerText.includes("%")) {
+        mainDispText.innerText += "%";
+        console.log(mainDispText.innerText)
         if (num1toggle) {
           num1 = Number(mainDispText.innerText.slice(0, length - 1)) / 100;
           console.log(
