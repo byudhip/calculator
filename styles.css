@@ -26,10 +26,10 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  height: 450px;
-  width: 350px;
+  height: 400px;
+  width: 270px;
   gap: 8px;
-  padding: 20px;
+  padding: 20px 10px;
   margin: auto;
   background-color: #ebf400;
   
@@ -38,6 +38,7 @@ body {
 .main-disp {
   font-size: clamp(1rem, 1.2rem, 1.8rem);
   padding: 4% 1%;
+  margin: 0;
   text-align: right;
   height: 50px;
   width: 90%;
@@ -55,10 +56,9 @@ body {
 
 button {
   flex: 0 1 calc(25% - 10px);
-  min-width: 60px;
-  min-height: 60px;
+  min-width: 54px;
+  min-height: 54px;
   border-radius: 5px;
-  background-color: #ccc;
   display: flex;
   justify-content: center;
   align-items: center;
