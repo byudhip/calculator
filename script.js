@@ -127,7 +127,9 @@ const operate = (num1, operator, num2) => {
         divide(num1, num2) < 1e15
       ) {
         num1toggle = true;
-        return Number.isInteger(divide(num1, num2)) ? divide(num1, num2): divide(num1, num2).toFixed(2);
+        return Number.isInteger(divide(num1, num2))
+          ? divide(num1, num2)
+          : divide(num1, num2).toFixed(2);
       } else if (
         (!Number.isInteger(num1) || !Number.isInteger(num2)) &&
         divide(num1, num2) >= 1e15
@@ -140,11 +142,12 @@ const operate = (num1, operator, num2) => {
         divide(num1, num2) < 1e15
       ) {
         num1toggle = true;
-        return divide(num1, num2).toFixed(2); 
-      } break;
+        return divide(num1, num2).toFixed(2);
+      }
+      break;
     default:
-      return mainDispText.innerText;  
-  } 
+      return mainDispText.innerText;
+  }
 };
 
 numBtnNodes.forEach((btn) => {
@@ -170,12 +173,12 @@ numBtnNodes.forEach((btn) => {
         typeof num1
       );
     } else if (num1toggle && num1.length < 15 && !operator) {
-      mainDispText.innerText+=btn.innerText;
+      mainDispText.innerText += btn.innerText;
       num1 = mainDispText.innerText;
       console.log(
         `This is num1 value: ${num1 || "empty string"},`,
         typeof num1
-      );  
+      );
     } else if (num1 && operator && num2.length < 16) {
       num1toggle = false;
       console.log(`num1 toggle is ${num1toggle}`);
@@ -251,7 +254,6 @@ miscBtn.forEach((btn) => {
       if (
         mainDispText.innerText === "undefined" ||
         mainDispText.innerText === "LEMAW" ||
-        // mainDispText.innerText === "0" ||
         mainDispText.innerText === "Infinity"
       ) {
         console.log(`C button pressed, did nothing`);
@@ -384,7 +386,9 @@ miscBtn.forEach((btn) => {
 });
 
 document.addEventListener("keydown", (e) => {
-  if (e.key === "/") {e.preventDefault()};
+  if (e.key === "/") {
+    e.preventDefault();
+  }
   const key = e.key;
   const validKeys = [
     "0",
@@ -431,7 +435,7 @@ document.addEventListener("keydown", (e) => {
           btn.click();
         } else if (btn.innerText === "=" && key === "Enter") {
           btn.click();
-        } 
+        }
       });
     }
   }
