@@ -4,7 +4,6 @@ const mainDispText = document.querySelector(".main-disp");
 const numBtnNodes = document.querySelectorAll(".num-btn");
 const opBtn = document.querySelectorAll(".op-btn");
 const miscBtn = document.querySelectorAll(".misc-btn");
-// const c = document.querySelector("");
 
 let num1 = "";
 let operator = "";
@@ -176,7 +175,7 @@ numBtnNodes.forEach((btn) => {
     } else if (num1.length === 15 || num2.length === 15) {
       alert("Number is outside operating range");
     } else if (mainDispText.innerText.endsWith("%")) {
-      alert("No dot allowed after percent symbol");
+      alert("No number/dot allowed after percent symbol");
       return;
     }
   });
