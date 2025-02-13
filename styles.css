@@ -20,7 +20,6 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    /* border-radius: 10px; */
     height: 450px;
     width: 350px;
     gap: 20px;
@@ -74,9 +73,3 @@ button {
     background-color: #008B8B;
     /* onclick value #00A3A3 */
 }
-
-/* .zero-btn {
-    flex-grow: 0.69;
-} */
-
-/* my push failed bc github suddenly asked for password?? */
