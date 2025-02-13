@@ -26,23 +26,27 @@ const operate = (num1, operator, num2) => {
         add(num1, num2) >= 1e15
       ) {
         alert("go buy scientific calculator");
-        return "";
+        num1toggle = true;
+        return "0";
       } else if (
         Number.isInteger(num1) &&
         Number.isInteger(num2) &&
         add(num1, num2) < 1e15
       ) {
+        num1toggle = true;
         return add(num1, num2);
       } else if (
         (!Number.isInteger(num1) || !Number.isInteger(num2)) &&
         add(num1, num2) >= 1e15
       ) {
         alert("go buy scientific calculator");
-        return "";
+        num1toggle = true;
+        return "0";
       } else if (
         (!Number.isInteger(num1) || !Number.isInteger(num2)) &&
         add(num1, num2) < 1e15
       ) {
+        num1toggle = true;
         return add(num1, num2).toFixed(2);
       }
       break;
@@ -52,23 +56,27 @@ const operate = (num1, operator, num2) => {
         Number.isInteger(num2 && subtract(num1, num2)) >= 1e15
       ) {
         alert("go buy scientific calculator");
-        return "";
+        num1toggle = true;
+        return "0";
       } else if (
         Number.isInteger(num1) &&
         Number.isInteger(num2) &&
         subtract(num1, num2) < 1e15
       ) {
+        num1toggle = true;
         return subtract(num1, num2);
       } else if (
         (!Number.isInteger(num1) || !Number.isInteger(num2)) &&
         subtract(num1, num2) >= 1e15
       ) {
         alert("go buy scientific calculator");
-        return "";
+        num1toggle = true;
+        return "0";
       } else if (
         (!Number.isInteger(num1) || !Number.isInteger(num2)) &&
         subtract(num1, num2) < 1e15
       ) {
+        num1toggle = true;
         return subtract(num1, num2).toFixed(2);
       }
       break;
@@ -79,23 +87,27 @@ const operate = (num1, operator, num2) => {
         multiply(num1, num2) >= 1e15
       ) {
         alert("go buy scientific calculator");
-        return "";
+        num1toggle = true;
+        return "0";
       } else if (
         Number.isInteger(num1) &&
         Number.isInteger(num2) &&
         multiply(num1, num2) < 1e15
       ) {
+        num1toggle = true;
         return multiply(num1, num2);
       } else if (
         (!Number.isInteger(num1) || !Number.isInteger(num2)) &&
         multiply(num1, num2) >= 1e15
       ) {
         alert("go buy scientific calculator");
-        return "";
+        num1toggle = true;
+        return "0";
       } else if (
         (!Number.isInteger(num1) || !Number.isInteger(num2)) &&
         multiply(num1, num2) < 1e15
       ) {
+        num1toggle = true;
         return multiply(num1, num2).toFixed(2);
       }
       break;
@@ -107,30 +119,32 @@ const operate = (num1, operator, num2) => {
       ) {
         alert("go buy scientific calculator");
         console.log(mainDispText.innerText, num1, typeof num1);
-        return "";
+        num1toggle = true;
+        return "0";
       } else if (
         Number.isInteger(num1) &&
         Number.isInteger(num2) &&
         divide(num1, num2) < 1e15
       ) {
-        return divide(num1, num2);
+        num1toggle = true;
+        return Number.isInteger(divide(num1, num2)) ? divide(num1, num2): divide(num1, num2).toFixed(2);
       } else if (
         (!Number.isInteger(num1) || !Number.isInteger(num2)) &&
         divide(num1, num2) >= 1e15
       ) {
         alert("go buy scientific calculator");
-        return "";
+        num1toggle = true;
+        return "0";
       } else if (
         (!Number.isInteger(num1) || !Number.isInteger(num2)) &&
         divide(num1, num2) < 1e15
       ) {
-        return divide(num1, num2).toFixed(2);
-        break;
-      }
+        num1toggle = true;
+        return divide(num1, num2).toFixed(2); 
+      } break;
     default:
-      return mainDispText.innerText;
-      break;
-  }
+      return mainDispText.innerText;  
+  } 
 };
 
 numBtnNodes.forEach((btn) => {
@@ -155,13 +169,13 @@ numBtnNodes.forEach((btn) => {
         `This is num1 value: ${num1 || "empty string"},`,
         typeof num1
       );
-    } else if (num1.length < 15 && !operator) {
-      mainDispText.innerText += btn.innerText;
+    } else if (num1toggle && num1.length < 15 && !operator) {
+      mainDispText.innerText+=btn.innerText;
       num1 = mainDispText.innerText;
       console.log(
         `This is num1 value: ${num1 || "empty string"},`,
         typeof num1
-      );
+      );  
     } else if (num1 && operator && num2.length < 16) {
       num1toggle = false;
       console.log(`num1 toggle is ${num1toggle}`);
@@ -205,7 +219,6 @@ opBtn.forEach((btn) => {
       } else {
         mainDispText.innerText = operate(num1, operator, num2);
         num1 = mainDispText.innerText;
-        num1toggle = false;
         num2 = "";
         operator = "";
         console.log(
@@ -238,7 +251,7 @@ miscBtn.forEach((btn) => {
       if (
         mainDispText.innerText === "undefined" ||
         mainDispText.innerText === "LEMAW" ||
-        mainDispText.innerText === "0" ||
+        // mainDispText.innerText === "0" ||
         mainDispText.innerText === "Infinity"
       ) {
         console.log(`C button pressed, did nothing`);
@@ -371,6 +384,7 @@ miscBtn.forEach((btn) => {
 });
 
 document.addEventListener("keydown", (e) => {
+  if (e.key === "/") {e.preventDefault()};
   const key = e.key;
   const validKeys = [
     "0",
@@ -417,7 +431,7 @@ document.addEventListener("keydown", (e) => {
           btn.click();
         } else if (btn.innerText === "=" && key === "Enter") {
           btn.click();
-        }
+        } 
       });
     }
   }
