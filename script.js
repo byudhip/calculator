@@ -294,7 +294,7 @@ miscBtn.forEach((btn) => {
         mainDispText.innerText === "undefined" ||
         mainDispText.innerText === "LEMAW" ||
         mainDispText.innerText === "0" ||
-        mainDispText.innerText === "Infinity"
+        mainDispText.innerText === "Infinity" || mainDispText.innerText === "NaN"
       ) {
         console.log(`+/- button pressed, did nothing`);
         return;
@@ -352,7 +352,7 @@ miscBtn.forEach((btn) => {
       if (
         mainDispText.innerText === "undefined" ||
         mainDispText.innerText === "LEMAW" ||
-        mainDispText.innerText === "Infinity"
+        mainDispText.innerText === "Infinity"|| mainDispText.innerText === "NaN"
       ) {
         console.log(`+/- button pressed, did nothing`);
         return;
