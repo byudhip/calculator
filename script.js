@@ -5,7 +5,7 @@ const numBtnNodes = document.querySelectorAll(".num-btn");
 const opBtn = document.querySelectorAll(".op-btn");
 const miscBtn = document.querySelectorAll(".misc-btn");
 
-let num1 = "";
+let num1 = "0";
 let operator = "";
 let num2 = "";
 let num1toggle = true;
@@ -158,7 +158,7 @@ numBtnNodes.forEach((btn) => {
     }, 100);
     if (
       mainDispText.innerText === "undefined" ||
-      mainDispText.innerText === "LEMAW"
+      mainDispText.innerText === "LEMAW"|| mainDispText.innerText === "NaN"
     ) {
       console.log(`Number button pressed, did nothing`);
       return;
@@ -256,7 +256,7 @@ miscBtn.forEach((btn) => {
       if (
         mainDispText.innerText === "undefined" ||
         mainDispText.innerText === "LEMAW" ||
-        mainDispText.innerText === "Infinity"
+        mainDispText.innerText === "Infinity" || mainDispText.innerText === "NaN"
       ) {
         console.log(`C button pressed, did nothing`);
         return;
