@@ -23,28 +23,28 @@ const operate = (num1, operator, num2) => {
       if (
         Number.isInteger(num1) &&
         Number.isInteger(num2) &&
-        add(num1, num2) >= 1e15
+        (num1 >= 1e15 || num2 >= 1e15 || add(num1, num2) >= 1e15)
       ) {
         alert("Number too large, out of bounds!");
         num1toggle = true;
-        return "0";
+        return num1;
       } else if (
         Number.isInteger(num1) &&
         Number.isInteger(num2) &&
-        add(num1, num2) < 1e15
+        (num1 < 1e15 || num2 < 1e15 || add(num1, num2) < 1e15)
       ) {
         num1toggle = true;
         return add(num1, num2);
       } else if (
         (!Number.isInteger(num1) || !Number.isInteger(num2)) &&
-        add(num1, num2) >= 1e15
+        (num1 >= 1e15 || num2 >= 1e15 || add(num1, num2) >= 1e15)
       ) {
         alert("Number too large, out of bounds!");
         num1toggle = true;
-        return "0";
+        return num1;
       } else if (
         (!Number.isInteger(num1) || !Number.isInteger(num2)) &&
-        add(num1, num2) < 1e15
+        (num1 < 1e15 || num2 < 1e15 || add(num1, num2) < 1e15)
       ) {
         num1toggle = true;
         return add(num1, num2).toFixed(2);
@@ -53,28 +53,28 @@ const operate = (num1, operator, num2) => {
     case "-":
       if (
         Number.isInteger(num1) &&
-        Number.isInteger(num2 && subtract(num1, num2)) >= 1e15
+        Number.isInteger(num2) && (num1 >= 1e15 || num2 >= 1e15 || subtract(num1, num2) >= 1e15)
       ) {
         alert("Number too large, out of bounds!");
         num1toggle = true;
-        return "0";
+        return num1;
       } else if (
         Number.isInteger(num1) &&
         Number.isInteger(num2) &&
-        subtract(num1, num2) < 1e15
+        (num1 < 1e15 || num2 < 1e15 || subtract(num1, num2) < 1e15)
       ) {
         num1toggle = true;
         return subtract(num1, num2);
       } else if (
         (!Number.isInteger(num1) || !Number.isInteger(num2)) &&
-        subtract(num1, num2) >= 1e15
+        (num1 >= 1e15 || num2 >= 1e15 || subtract(num1, num2) >= 1e15)
       ) {
         alert("Number too large, out of bounds!");
         num1toggle = true;
-        return "0";
+        return num1;
       } else if (
         (!Number.isInteger(num1) || !Number.isInteger(num2)) &&
-        subtract(num1, num2) < 1e15
+        (num1 < 1e15 || num2 < 1e15 || subtract(num1, num2) < 1e15)
       ) {
         num1toggle = true;
         return subtract(num1, num2).toFixed(2);
@@ -84,28 +84,28 @@ const operate = (num1, operator, num2) => {
       if (
         Number.isInteger(num1) &&
         Number.isInteger(num2) &&
-        multiply(num1, num2) >= 1e15
+        (num1 >= 1e15 || num2 >= 1e15 || multiply(num1, num2) >= 1e15)
       ) {
         alert("Number too large, out of bounds!");
         num1toggle = true;
-        return "0";
+        return num1;
       } else if (
         Number.isInteger(num1) &&
         Number.isInteger(num2) &&
-        multiply(num1, num2) < 1e15
+        (num1 < 1e15 || num2 < 1e15 || multiply(num1, num2) < 1e15)
       ) {
         num1toggle = true;
         return multiply(num1, num2);
       } else if (
         (!Number.isInteger(num1) || !Number.isInteger(num2)) &&
-        multiply(num1, num2) >= 1e15
+        (num1 >= 1e15 || num2 >= 1e15 || multiply(num1, num2) >= 1e15)
       ) {
         alert("Number too large, out of bounds!");
         num1toggle = true;
-        return "0";
+        return num1;
       } else if (
         (!Number.isInteger(num1) || !Number.isInteger(num2)) &&
-        multiply(num1, num2) < 1e15
+        (num1 < 1e15 || num2 < 1e15 || multiply(num1, num2) < 1e15)
       ) {
         num1toggle = true;
         return multiply(num1, num2).toFixed(2);
@@ -115,7 +115,7 @@ const operate = (num1, operator, num2) => {
       if (
         Number.isInteger(num1) &&
         Number.isInteger(num2) &&
-        divide(num1, num2) >= 1e15
+        (num1 >= 1e15 || num2 >= 1e15 || divide(num1, num2) >= 1e15)
       ) {
         alert("Number too large, out of bounds!");
         console.log(mainDispText.innerText, num1, typeof num1);
@@ -124,7 +124,7 @@ const operate = (num1, operator, num2) => {
       } else if (
         Number.isInteger(num1) &&
         Number.isInteger(num2) &&
-        divide(num1, num2) < 1e15
+        (num1 < 1e15 || num2 < 1e15 || divide(num1, num2) < 1e15)
       ) {
         num1toggle = true;
         return Number.isInteger(divide(num1, num2))
@@ -132,14 +132,14 @@ const operate = (num1, operator, num2) => {
           : divide(num1, num2).toFixed(2);
       } else if (
         (!Number.isInteger(num1) || !Number.isInteger(num2)) &&
-        divide(num1, num2) >= 1e15
+        (num1 >= 1e15 || num2 >= 1e15 || divide(num1, num2) >= 1e15)
       ) {
         alert("Number too large, out of bounds!");
         num1toggle = true;
-        return "0";
+        return num1;
       } else if (
         (!Number.isInteger(num1) || !Number.isInteger(num2)) &&
-        divide(num1, num2) < 1e15
+        (num1 < 1e15 || num2 < 1e15 || divide(num1, num2) < 1e15)
       ) {
         num1toggle = true;
         return divide(num1, num2).toFixed(2);
