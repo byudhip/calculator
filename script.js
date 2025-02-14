@@ -4,6 +4,7 @@ const mainDispText = document.querySelector(".main-disp");
 const numBtnNodes = document.querySelectorAll(".num-btn");
 const opBtn = document.querySelectorAll(".op-btn");
 const miscBtn = document.querySelectorAll(".misc-btn");
+const zeroFloat = /^0\.0*0?$/; // to catch zero point zero zero zero...
 
 let num1 = "0";
 let operator = "";
@@ -264,7 +265,7 @@ miscBtn.forEach((btn) => {
       mainDispText.innerText =
         (mainDispText.innerText.length <= 2 &&
           mainDispText.innerText.startsWith("-")) ||
-        mainDispText.innerText.length === 1
+        mainDispText.innerText.length === 1 
           ? "0"
           : mainDispText.innerText.slice(0, mainDispText.innerText.length - 1);
       console.log(`C button pressed, this is toggle value: ${num1toggle}`);
@@ -294,7 +295,7 @@ miscBtn.forEach((btn) => {
         mainDispText.innerText === "undefined" ||
         mainDispText.innerText === "LEMAW" ||
         mainDispText.innerText === "0" ||
-        mainDispText.innerText === "Infinity" || mainDispText.innerText === "NaN"
+        mainDispText.innerText === "Infinity" || mainDispText.innerText === "NaN" || zeroFloat.test(mainDispText.innerText)
       ) {
         console.log(`+/- button pressed, did nothing`);
         return;
@@ -352,7 +353,7 @@ miscBtn.forEach((btn) => {
       if (
         mainDispText.innerText === "undefined" ||
         mainDispText.innerText === "LEMAW" ||
-        mainDispText.innerText === "Infinity"|| mainDispText.innerText === "NaN"
+        mainDispText.innerText === "Infinity"|| mainDispText.innerText === "NaN" || zeroFloat.test(mainDispText.innerText)
       ) {
         console.log(`+/- button pressed, did nothing`);
         return;
